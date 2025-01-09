@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <title>夢解釈アプリ</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            display: block; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        
+        .results {
+            overflow-y: auto;
+            width: 100%;
+            margin-top: 20px;
+            max-height: 50vh; 
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>夢解釈アプリ</h1>
+        <form method="POST" action="/interpret">
+            <label for="dream_text">夢の内容を入力してください:</label><br>
+            <textarea id="dream_text" name="dream_text" rows="4" required></textarea><br>
+            <button type="submit">解釈する</button>
+        </form>
+        {% if interpretation %}
+        <h2>解釈結果:</h2>
+        <div style="text-align: left;">
+            <p>{{ interpretation|safe }}</p>
+        </div>
+        {% endif %}
+        {% if image_url %}
+        <h2>関連する画像:</h2>
+        <img src="{{ image_url }}" alt="Dream Image">
+
+        {% endif %}
+    </div>
+</body>
+</html>
